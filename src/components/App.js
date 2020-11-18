@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import api from "../utils/api.js";
@@ -15,6 +16,9 @@ import { useState } from "react";
 
 function App() {
   // Хуки-состояния
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [userData, setUserData] = useState({ email: '', password: '' })
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -25,6 +29,9 @@ function App() {
   });
   const [currentUser, setCurrentUser] = useState({})
   const [currentCards, setCurrentCards] = useState([])
+
+  const history = useHistory();
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getItems()])
       .then(([userInfo, initialCards]) => {
@@ -33,6 +40,35 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => { tokenCheck() }, [])
+
+
+
+  function handleLogin(userData) {
+    setUserData(userData)
+    setLoggedIn(true)
+  }
+  // Проверка токена
+
+  function tokenCheck() {
+    const jwt = getToken();
+    if (!jwt) {
+      return;
+    }
+
+    mestoAuth.getContent(jwt)
+      .then((res) => {
+        if (res) {
+          const userData = {
+            email: res.email,
+            password: res.password
+          }
+          handleLogin()
+          history.push('/ducks')
+        }
+      })
+  }
 
 
 

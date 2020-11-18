@@ -11,7 +11,6 @@ const Register = () => {
         password: ''
     })
     const [message, setMessage] = useState('')
-
     const history = useHistory()
 
     const handleChange = (e) => {
@@ -23,13 +22,14 @@ const Register = () => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         const { email, password } = data;
 
         if (password === confirmPassword) {
             mestoAuth.register(email, password).then((res) => {
                 if (res.statusCode !== 400) {
                     setMessage(''),
-                        history.push('/login');
+                        history.push('/sign-in');
                 } else {
                     setMessage(errorMessage.somethingWrong)
                 }
