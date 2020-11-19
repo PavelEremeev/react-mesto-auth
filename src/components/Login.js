@@ -45,7 +45,7 @@ const Login = ({ handleLogin }) => {
     return (
         <section className="signin">
             <form className="signin__form" onSubmit={handleSubmit}>
-                <h2 className="signin__title">Вход</h2>
+                <h2 className="popup__text popup__text_signin">Вход</h2>
                 <input
                     className="popup__input popup__input_signin"
                     placeholder="Email"

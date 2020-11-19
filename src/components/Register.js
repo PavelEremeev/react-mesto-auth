@@ -29,7 +29,7 @@ const Register = () => {
             mestoAuth.register(email, password).then((res) => {
                 if (res.statusCode !== 400) {
                     setMessage(''),
-                        history.push('/sign-in');
+                        history.push('/signin');
                 } else {
                     setMessage(errorMessage.somethingWrong)
                 }
@@ -40,7 +40,7 @@ const Register = () => {
     return (
         <section className="signup">
             <form className="signup__form" onSubmit={handleSubmit}>
-                <h2 className="signup__title">Регистрация</h2>
+                <h2 className="popup__text popup__text_signup">Регистрация</h2>
                 <input
                     className="popup__input popup__input_signup"
                     placeholder="Email"
@@ -60,7 +60,7 @@ const Register = () => {
                 <button type="submit" className="popup__submit-button popup__submit-button_signup">Зарегистрироваться</button>
                 <div className="signup__container">
                     <h6 className="signup__text">Уже зарегистрированы?</h6>
-                    <Link to="/sign-in" className="signup__link">Вход</Link>
+                    <Link to="/signin" className="signup__link">Вход</Link>
                 </div>
             </form>
         </section>

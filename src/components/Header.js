@@ -7,7 +7,7 @@ function Header() {
   const history = useHistory();
   function signOut() {
     removeToken()
-    history.push('/login');
+    history.push('/signup');
   }
 
   /// НАПИСАТЬ СТИЛИ ДОПИСАТЬ РАЗМЕТКУ
