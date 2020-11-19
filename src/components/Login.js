@@ -43,8 +43,27 @@ const Login = ({ handleLogin }) => {
     }
 
     return (
-        <section className="register">
-
+        <section className="signin">
+            <form className="signin__form" onSubmit={handleSubmit}>
+                <h2 className="signin__title">Вход</h2>
+                <input
+                    className="popup__input popup__input_signin"
+                    placeholder="Email"
+                    required
+                    value={data.email}
+                    onChange={handleChange}
+                    type="email"
+                ></input>
+                <input
+                    className="popup__input popup__input_signin"
+                    placeholder="Пароль"
+                    required
+                    value={data.password}
+                    onChange={handleChange}
+                    type="password"
+                ></input>
+                <button type="submit" className="popup__submit-button popup__submit-button_signin">Войти</button>
+            </form>
         </section>
     )
 }

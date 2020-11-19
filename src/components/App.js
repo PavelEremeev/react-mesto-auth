@@ -65,7 +65,7 @@ function App() {
             password: res.password
           }
           handleLogin()
-          history.push('/ducks')
+          history.push('/')
         }
       })
   }
