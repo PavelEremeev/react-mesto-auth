@@ -1,3 +1,4 @@
+import { PromiseProvider } from "mongoose";
 import React from "react";
 import { Link, Route, useHistory, Switch } from 'react-router-dom'
 import logo from "../images/logo.svg";
@@ -6,7 +7,7 @@ import "../index.css";
 import { removeToken } from "../utils/token";
 
 
-function Header() {
+function Header({ handleLogin, data }) {
   const history = useHistory();
   function signOut() {
     removeToken()
@@ -21,7 +22,7 @@ function Header() {
         <header className="header">
           <img className="header__logo" src={logo} alt="logo.pic" />
           <div className="header__user-container">
-            <div className="header__user">email@email</div>
+            <div className="header__user">data.email</div>
             <Link onClick={signOut} className="header__user-link">Выйти</Link>
           </div>
         </header>
