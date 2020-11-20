@@ -38,11 +38,11 @@ const Register = () => {
     }
 
     return (
-        <section className="signup">
-            <form className="signup__form" onSubmit={handleSubmit}>
-                <h2 className="popup__text popup__text_signup">Регистрация</h2>
+        <section className="login">
+            <form className="login__form" onSubmit={handleSubmit}>
+                <h2 className="login__text">Регистрация</h2>
                 <input
-                    className="popup__input popup__input_signup"
+                    className="login__input"
                     placeholder="Email"
                     required
                     value={data.email}
@@ -50,17 +50,17 @@ const Register = () => {
                     type="email"
                 ></input>
                 <input
-                    className="popup__input popup__input_signup"
+                    className="login__input"
                     placeholder="Пароль"
                     required
                     value={data.password}
                     onChange={handleChange}
                     type="password"
                 ></input>
-                <button type="submit" className="popup__submit-button popup__submit-button_signup">Зарегистрироваться</button>
-                <div className="signup__container">
-                    <h6 className="signup__text">Уже зарегистрированы?</h6>
-                    <Link to="/signin" className="signup__link">Вход</Link>
+                <button type="submit" className="login__submit-button">Зарегистрироваться</button>
+                <div className="login__container">
+                    <h4 className="login__subtext">Уже зарегистрированы?</h4>
+                    <Link to="/signin" className="login__link">Войти</Link>
                 </div>
             </form>
         </section>
