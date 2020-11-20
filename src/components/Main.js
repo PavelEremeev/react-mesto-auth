@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import { CurrentCardsContext } from '../contexts/CurrentСardsContext'
-import { useContext } from "react";
 
 function Main(props) {
 

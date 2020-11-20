@@ -3,6 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import api from "../utils/api.js";
+import { getToken } from "../utils/token";
+import * as mestoAuth from "../mestoAuth"
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
@@ -11,7 +13,6 @@ import { CurrentCardsContext } from "../contexts/CurrentСardsContext"
 import AddPlacePopup from "./AddPlacePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
-import { useState } from "react";
 
 
 function App() {

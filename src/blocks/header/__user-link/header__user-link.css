@@ -1,0 +1,13 @@
+.header__user-link {
+  cursor: pointer;
+  border: none;
+  color: #a9a9a9;
+  text-decoration: none;
+  transition: linear 0.3s all;
+  line-height: 18px;
+}
+
+.header__user-link:hover {
+  color: white;
+  transition: linear 0.5s all;
+}

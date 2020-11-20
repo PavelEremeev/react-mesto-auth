@@ -1,7 +1,10 @@
 import React from "react";
-import { Link, Route, useHistory } from 'react-router-dom'
+import { Link, Route, useHistory, Switch } from 'react-router-dom'
 import logo from "../images/logo.svg";
 import "../index.css";
+
+import { removeToken } from "../utils/token";
+
 
 function Header() {
   const history = useHistory();
@@ -17,22 +20,26 @@ function Header() {
       <Route exact path="/">
         <header className="header">
           <img className="header__logo" src={logo} alt="logo.pic" />
-          <div className="header__user-containter">
-            <div classname="header__user"></div>
-            <button onClick={signOut} className="header__user-signout">Выйти</button>
+          <div className="header__user-container">
+            <div className="header__user">email@email</div>
+            <Link onClick={signOut} className="header__user-link">Выйти</Link>
           </div>
         </header>
       </Route>
-      <Route path="/sign-in">
+      <Route path="/signin">
         <header className="header">
           <img className="header__logo" src={logo} alt="logo.pic" />
-          <Link></Link>
+          <div className="header__user-container header__user-container_logout">
+            <Link to="/signup" className="header__user-link header__user-link_logout">Регистрация</Link>
+          </div>
         </header>
       </Route>
-      <Route path="/sign-up">
+      <Route path="/signup">
         <header className="header">
           <img className="header__logo" src={logo} alt="logo.pic" />
-          <Link></Link>
+          <div className="header__user-container header__user-container_logout">
+            <Link to="/signin" className="header__user-link header__user-link_logout">Вход</Link>
+          </div>
         </header>
       </Route>
     </Switch>
