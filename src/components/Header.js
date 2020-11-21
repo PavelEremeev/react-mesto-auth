@@ -7,7 +7,11 @@ import "../index.css";
 import { removeToken } from "../utils/token";
 
 
+<<<<<<< HEAD
 function Header({ data }) {
+=======
+function Header({ handleLogin, data }) {
+>>>>>>> 80dcc4ab2874e732f10a3992ac3c6e94d94b5f95
   const history = useHistory();
   function signOut() {
     removeToken()
