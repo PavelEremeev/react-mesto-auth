@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, Switch, Route, Redirect } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import api from "../utils/api.js";
@@ -13,6 +13,9 @@ import { CurrentCardsContext } from "../contexts/CurrentСardsContext"
 import AddPlacePopup from "./AddPlacePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import ProtectedRoute from "./ProtectedRoute";
+import Login from "./Login";
+import Register from "./Register";
 
 
 function App() {
@@ -65,7 +68,7 @@ function App() {
             email: res.email,
             password: res.password
           }
-          handleLogin()
+          handleLogin(userData)
           history.push('/')
         }
       })
@@ -161,19 +164,30 @@ function App() {
       <CurrentCardsContext.Provider value={currentCards}>
         <div className="page">
           <Header />
-          <Main
-            onClickAvatar={handleEditAvatarClick}
-            onClickProfile={handleEditProfileClick}
-            onClickNewPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            onCardDelete={handleDeleteClick}
-            onCardLike={handleLikeClick}
-            onCardDislike={handleDislikeClick}
-            profileIsOpen={isEditProfilePopupOpen}
-            avatarIsOpen={isEditAvatarPopupOpen}
-            newPlaceIsOpen={isAddPlacePopupOpen}
-            card={selectedCard}
-          />
+          <Switch>
+            <ProtectedRoute exact path='/' loggedIn={loggedIn}>
+              <Main
+                onClickAvatar={handleEditAvatarClick}
+                onClickProfile={handleEditProfileClick}
+                onClickNewPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                onCardDelete={handleDeleteClick}
+                onCardLike={handleLikeClick}
+                onCardDislike={handleDislikeClick}
+                profileIsOpen={isEditProfilePopupOpen}
+                avatarIsOpen={isEditAvatarPopupOpen}
+                newPlaceIsOpen={isAddPlacePopupOpen}
+                card={selectedCard}
+              />
+            </ProtectedRoute>
+            <Route path="/signin"><Login handleLogin={handleLogin} /></Route>
+            <Route path="/signup"><Register /></Route>
+
+            <ProtectedRoute path='/' loggedIn={loggedIn} component={Footer} />
+            <Route>
+              {loggedIn ? <Redirect to="/" /> : <Redirect to="/signup" />}
+            </Route>
+          </Switch>
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={handleClosePopups}
@@ -189,6 +203,7 @@ function App() {
             onClose={handleClosePopups}
             onAddPlace={handleAppPlaceSubmit}
           />
+          <ImagePopup isOpen={selectedCard.isOpen} card={selectedCard} onClose={handleClosePopups} />
           {/* <PopupWithForm
         popupClassName="popup_confirm"
         isOpen={isOpen}
@@ -208,8 +223,6 @@ function App() {
           </>
         }
       /> */}
-          <ImagePopup isOpen={selectedCard.isOpen} card={selectedCard} onClose={handleClosePopups} />
-          <Footer />
         </div>
       </CurrentCardsContext.Provider>
     </CurrentUserContext.Provider>

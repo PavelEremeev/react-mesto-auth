@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import * as mestoAuth from "../mestoAuth"
 
 const errorMessage = { somethingWrong: 'Что-то пошло не так! :(' }
 
@@ -25,11 +26,11 @@ const Register = () => {
         e.preventDefault();
         const { email, password } = data;
 
-        if (password === confirmPassword) {
+        if (password === password) {
             mestoAuth.register(email, password).then((res) => {
                 if (res.statusCode !== 400) {
-                    setMessage(''),
-                        history.push('/signin');
+                    setMessage('');
+                    history.push('/signin');
                 } else {
                     setMessage(errorMessage.somethingWrong)
                 }
@@ -45,6 +46,7 @@ const Register = () => {
                     className="login__input"
                     placeholder="Email"
                     required
+                    name="email"
                     value={data.email}
                     onChange={handleChange}
                     type="email"
@@ -53,6 +55,7 @@ const Register = () => {
                     className="login__input"
                     placeholder="Пароль"
                     required
+                    name="password"
                     value={data.password}
                     onChange={handleChange}
                     type="password"

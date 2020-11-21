@@ -7,14 +7,12 @@ import "../index.css";
 import { removeToken } from "../utils/token";
 
 
-function Header({ handleLogin, data }) {
+function Header({ data }) {
   const history = useHistory();
   function signOut() {
     removeToken()
     history.push('/signup');
   }
-
-  /// НАПИСАТЬ СТИЛИ ДОПИСАТЬ РАЗМЕТКУ
 
   return (
     <Switch>

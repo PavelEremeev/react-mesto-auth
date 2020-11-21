@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import * as mestoAuth from "../mestoAuth"
 
 const errorMessage = { somethingWrong: 'Что-то пошло не так! :(' }
 
@@ -50,6 +51,7 @@ const Login = ({ handleLogin }) => {
                     className="login__input"
                     placeholder="Email"
                     required
+                    name="email"
                     type="email"
                     value={data.email}
                     onChange={handleChange}
@@ -58,6 +60,7 @@ const Login = ({ handleLogin }) => {
                     className="login__input"
                     placeholder="Пароль"
                     required
+                    name="password"
                     type="password"
                     value={data.password}
                     onChange={handleChange}
