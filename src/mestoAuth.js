@@ -31,7 +31,7 @@ export const authorize = (email, password) => {
     .then((res => res.json()))
     .then((data) => {
       if (data.token) {
-        setToken(data.jwt);
+        setToken(data.token);
         return data;
       } else {
         return;

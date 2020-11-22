@@ -36,7 +36,7 @@ const Login = ({ handleLogin }) => {
                 if (data.jwt) {
                     setData({ email: '', password: '' });
                     setMessage('');
-                    handleLogin(data.user)
+                    handleLogin(data.token)
                     history.push('/')
                 }
             })

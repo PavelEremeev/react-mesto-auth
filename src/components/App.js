@@ -23,7 +23,7 @@ function App() {
   // Хуки-состояния
   const [loggedIn, setLoggedIn] = useState(false)
   const [userData, setUserData] = useState({ email: '', password: '' })
-  const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(false);
+  const [isAuthPopupOpen, setIsAuthPopupPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -69,6 +69,7 @@ function App() {
             email: res.email,
             password: res.password
           }
+
           handleLogin(userData)
           history.push('/')
         }
