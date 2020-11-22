@@ -167,20 +167,20 @@ function App() {
         <div className="page">
           <Header />
           <Switch>
-            <ProtectedRoute exact path='/' loggedIn={loggedIn}>
-              <Main
-                onClickAvatar={handleEditAvatarClick}
-                onClickProfile={handleEditProfileClick}
-                onClickNewPlace={handleAddPlaceClick}
-                onCardClick={handleCardClick}
-                onCardDelete={handleDeleteClick}
-                onCardLike={handleLikeClick}
-                onCardDislike={handleDislikeClick}
-                profileIsOpen={isEditProfilePopupOpen}
-                avatarIsOpen={isEditAvatarPopupOpen}
-                newPlaceIsOpen={isAddPlacePopupOpen}
-                card={selectedCard}
-              />
+            <ProtectedRoute exact path='/'
+              loggedIn={loggedIn}
+              component={Main}
+              onClickAvatar={handleEditAvatarClick}
+              onClickProfile={handleEditProfileClick}
+              onClickNewPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              onCardDelete={handleDeleteClick}
+              onCardLike={handleLikeClick}
+              onCardDislike={handleDislikeClick}
+              profileIsOpen={isEditProfilePopupOpen}
+              avatarIsOpen={isEditAvatarPopupOpen}
+              newPlaceIsOpen={isAddPlacePopupOpen}
+              card={selectedCard}>
             </ProtectedRoute>
             <Route path="/signin"><Login handleLogin={handleLogin} /></Route>
             <Route path="/signup"><Register isOpen={isAuthPopupOpen} /></Route>
