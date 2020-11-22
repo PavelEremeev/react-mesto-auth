@@ -51,10 +51,7 @@ const Login = ({ handleLogin }) => {
                     className="login__input"
                     placeholder="Email"
                     required
-<<<<<<< HEAD
                     name="email"
-=======
->>>>>>> 80dcc4ab2874e732f10a3992ac3c6e94d94b5f95
                     type="email"
                     value={data.email}
                     onChange={handleChange}
@@ -63,10 +60,7 @@ const Login = ({ handleLogin }) => {
                     className="login__input"
                     placeholder="Пароль"
                     required
-<<<<<<< HEAD
                     name="password"
-=======
->>>>>>> 80dcc4ab2874e732f10a3992ac3c6e94d94b5f95
                     type="password"
                     value={data.password}
                     onChange={handleChange}

@@ -16,13 +16,14 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 import Register from "./Register";
+import InfoTooltip from "./InfoTooltip";
 
 
 function App() {
   // Хуки-состояния
   const [loggedIn, setLoggedIn] = useState(false)
   const [userData, setUserData] = useState({ email: '', password: '' })
-
+  const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -181,7 +182,7 @@ function App() {
               />
             </ProtectedRoute>
             <Route path="/signin"><Login handleLogin={handleLogin} /></Route>
-            <Route path="/signup"><Register /></Route>
+            <Route path="/signup"><Register isOpen={isAuthPopupOpen} /></Route>
 
             <ProtectedRoute path='/' loggedIn={loggedIn} component={Footer} />
             <Route>
@@ -203,6 +204,7 @@ function App() {
             onClose={handleClosePopups}
             onAddPlace={handleAppPlaceSubmit}
           />
+          <InfoTooltip isOpen={isAuthPopupOpen} onClose={handleClosePopups} loggedIn={loggedIn} />
           <ImagePopup isOpen={selectedCard.isOpen} card={selectedCard} onClose={handleClosePopups} />
           {/* <PopupWithForm
         popupClassName="popup_confirm"

@@ -7,13 +7,14 @@
   font-family: "Inter", Arial, sans-serif;
   background: black;
   margin: 0 auto;
-  padding-top: 45px;
-  padding-bottom: 60px;
+  min-height: 100vh;
+  /* padding-top: 45px;
+  padding-bottom: 60px; */
 }
 
-@media screen and (max-width: 650px) {
+/* @media screen and (max-width: 650px) {
   .page {
     padding-top: 30px;
     padding-bottom: 30px;
   }
-}
+} */

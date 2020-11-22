@@ -6,7 +6,7 @@ const errorMessage = { somethingWrong: 'Что-то пошло не так! :(' 
 
 
 
-const Register = () => {
+const Register = ({ isOpen }) => {
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -60,10 +60,10 @@ const Register = () => {
                     onChange={handleChange}
                     type="password"
                 ></input>
-                <button type="submit" className="login__submit-button">Зарегистрироваться</button>
+                <button type="submit" onClick={isOpen} className="login__submit-button">Зарегистрироваться</button>
                 <div className="login__container">
                     <h4 className="login__subtext">Уже зарегистрированы?</h4>
-                    <Link to="/signin" className="login__link">Войти</Link>
+                    <Link to="/signin" className="login__link" >Войти</Link>
                 </div>
             </form>
         </section>

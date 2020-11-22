@@ -13,6 +13,10 @@
   justify-content: space-between;
   margin: 0 auto 0;
   border-bottom: 1px solid #545454;
+  margin: 0 auto 0;
+  border-bottom: 1px solid #545454;
+  padding-bottom: 21px;
+  padding-top: 45px;
 }
 
 @media screen and (max-width: 945px) {
@@ -25,5 +29,7 @@
 @media screen and (max-width: 375px) {
   .header {
     height: 56px;
+    padding-bottom: 15px;
+    padding-top: 26px;
   }
 }
