@@ -28,3 +28,65 @@
   align-items: center;
   justify-content: center;
 }
+
+.popup__form-login {
+  width: 430px;
+  height: 330px;
+  background: #ffffff;
+  border-radius: 10px;
+  margin: 34px 36px 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__form-login {
+    width: 280px;
+    height: 308px;
+  }
+}
+
+.popup__close-button_login {
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__close-button_login {
+    top: -50px;
+    left: 135px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .popup__close-button_login {
+    left: 105px;
+  }
+}
+
+.popup__image-login {
+  width: 120px;
+  height: 120px;
+  margin-top: 60px;
+  margin-bottom: 0;
+}
+
+.popup__text-login {
+  max-width: 300px;
+  height: 58px;
+  margin-top: 32px;
+  margin-bottom: 60px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__text-login {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

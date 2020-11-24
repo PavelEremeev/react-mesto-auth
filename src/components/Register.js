@@ -1,18 +1,17 @@
+import { PromiseProvider } from "mongoose";
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import * as mestoAuth from "../mestoAuth"
 
-const errorMessage = { somethingWrong: 'Что-то пошло не так! :(' }
 
 
 
-const Register = ({ isOpen }) => {
+const Register = ({ onRegister }) => {
     const [data, setData] = useState({
         email: '',
         password: ''
     })
-    const [message, setMessage] = useState('')
-    const history = useHistory()
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,18 +24,9 @@ const Register = ({ isOpen }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { email, password } = data;
-
-        if (password === password) {
-            mestoAuth.register(email, password).then((res) => {
-                if (res.statusCode !== 400) {
-                    setMessage('');
-                    history.push('/signin');
-                } else {
-                    setMessage(errorMessage.somethingWrong)
-                }
-            })
-        }
+        onRegister(email, password)
     }
+
 
     return (
         <section className="login">
@@ -60,7 +50,7 @@ const Register = ({ isOpen }) => {
                     onChange={handleChange}
                     type="password"
                 ></input>
-                <button type="submit" onClick={isOpen} className="login__submit-button">Зарегистрироваться</button>
+                <button type="submit" className="login__submit-button">Зарегистрироваться</button>
                 <div className="login__container">
                     <h4 className="login__subtext">Уже зарегистрированы?</h4>
                     <Link to="/signin" className="login__link" >Войти</Link>

@@ -17,12 +17,15 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
+import { set } from "mongoose";
+
 
 
 function App() {
   // Хуки-состояния
   const [loggedIn, setLoggedIn] = useState(false)
   const [userData, setUserData] = useState({ email: '', password: '' })
+  const [status, setStatus] = useState(false)
   const [isAuthPopupOpen, setIsAuthPopupPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -69,7 +72,6 @@ function App() {
             email: res.email,
             password: res.password
           }
-
           handleLogin(userData)
           history.push('/')
         }
@@ -96,6 +98,7 @@ function App() {
     });
   }
 
+
   // Хендлеры карточки 
   function handleDeleteClick(card) {
     api.deleteItem(card)
@@ -121,6 +124,21 @@ function App() {
       }).catch(err => console.log(err))
   }
 
+  function handleUserRegister(email, password) {
+    mestoAuth.register(email, password).then((res) => {
+      if (res.data._id) {
+        setStatus(true)
+        setIsAuthPopupPopupOpen(true)
+        history.push('/signin');
+      }
+    }).catch(err => {
+      console.log(err)
+      setStatus(false)
+      setIsAuthPopupPopupOpen(true)
+    })
+  }
+
+
 
 
   // Хендлер закрытия попапов
@@ -133,6 +151,7 @@ function App() {
       link: "",
       name: "",
     });
+    setIsAuthPopupPopupOpen(false)
   }
 
   // Хендлеры cабмитов попапов
@@ -183,7 +202,7 @@ function App() {
               card={selectedCard}>
             </ProtectedRoute>
             <Route path="/signin"><Login handleLogin={handleLogin} /></Route>
-            <Route path="/signup"><Register isOpen={isAuthPopupOpen} /></Route>
+            <Route path="/signup"><Register onRegister={handleUserRegister} /></Route>
 
             <ProtectedRoute path='/' loggedIn={loggedIn} component={Footer} />
             <Route>
@@ -205,7 +224,7 @@ function App() {
             onClose={handleClosePopups}
             onAddPlace={handleAppPlaceSubmit}
           />
-          <InfoTooltip isOpen={isAuthPopupOpen} onClose={handleClosePopups} loggedIn={loggedIn} />
+          <InfoTooltip isOpen={isAuthPopupOpen} onClose={handleClosePopups} status={status} />
           <ImagePopup isOpen={selectedCard.isOpen} card={selectedCard} onClose={handleClosePopups} />
           {/* <PopupWithForm
         popupClassName="popup_confirm"
