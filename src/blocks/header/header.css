@@ -5,7 +5,20 @@
 @import url(./__user-container/_logout/header__user-container_logout.css);
 @import url(./__user-link/_logout/header__user-link_logout.css);
 
-.header {
+@media screen and (max-width: 450px) {
+  .header__menu_open {
+    display: flex;
+  }
+}
+.header__menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  margin-bottom: 40px;
+}
+
+.header__container {
   max-width: 882px;
   height: 74px;
   display: flex;
@@ -14,22 +27,90 @@
   margin: 0 auto 0;
   border-bottom: 1px solid #545454;
   margin: 0 auto 0;
-  border-bottom: 1px solid #545454;
-  padding-bottom: 21px;
+  padding-bottom: 41px;
   padding-top: 45px;
 }
 
 @media screen and (max-width: 945px) {
-  .header {
+  .header__container {
     margin-left: 19px;
     margin-right: 19px;
   }
 }
 
-@media screen and (max-width: 375px) {
-  .header {
+@media screen and (max-width: 450px) {
+  .header__container {
+    border-top: 1px solid #545454;
+    padding-top: 15px;
+    padding-bottom: 31px;
     height: 56px;
-    padding-bottom: 15px;
-    padding-top: 26px;
   }
+}
+
+.header__button-wrapper {
+  width: 30px;
+  height: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .header__button-wrapper {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header__button {
+    position: relative;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .header__button::before {
+    position: absolute;
+    left: 0;
+    top: -10px;
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+  }
+
+  .header__button::after {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+  }
+}
+
+.header__button.header__button_active {
+  background-color: transparent;
+}
+
+.header__button.header__button_active::before {
+  transform: rotate(45deg);
+  top: 0;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+
+.header__button.header__button_active::after {
+  transform: rotate(-45deg);
+  top: 0;
+  transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
 }

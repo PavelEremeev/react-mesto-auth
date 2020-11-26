@@ -25,6 +25,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState(false)
+  const [isHeaderMenuOpen, setHeaderMenuOpen] = useState(false)
   const [isAuthPopupOpen, setIsAuthPopupPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -67,6 +68,11 @@ function App() {
       link: props.link,
       name: props.name,
     });
+  }
+
+  function handleHeaderMenuOpen() {
+
+    setHeaderMenuOpen(true)
   }
 
 
@@ -192,7 +198,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
         <div className="page">
-          <Header email={email} />
+          <Header email={email} onClickMenu={isHeaderMenuOpen} onChangeHeaderMenu={handleHeaderMenuOpen} />
           <Switch>
             <ProtectedRoute exact path='/'
               loggedIn={loggedIn}

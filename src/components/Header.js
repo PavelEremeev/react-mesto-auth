@@ -6,7 +6,7 @@ import "../index.css";
 import { removeToken } from "../utils/token";
 
 
-function Header({ email }) {
+function Header({ email, ...props }) {
 
   const history = useHistory();
   function signOut() {
@@ -14,30 +14,45 @@ function Header({ email }) {
     // history.push('/signup');
   }
 
+
+
   return (
     <Switch>
       <Route exact path="/">
         <header className="header">
-          <img className="header__logo" src={logo} alt="logo.pic" />
-          <div className="header__user-container">
+          <div className={`header__menu ${props.onClickMenu ? `header__menu_open` : ""}`}>
             <div className="header__user">{email}</div>
             <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
+          </div>
+          <div className="header__container">
+            <img className="header__logo" src={logo} alt="logo.pic" />
+            <div className="header__button-wrapper" onClick={props.onChangeHeaderMenu}>
+              <button className={`header__button ${props.onClickMenu ? `header__button_active` : ""}`} /></div>
+            <div className="header__user-container">
+              <div className="header__user">{email}</div>
+              <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
+            </div>
+
           </div>
         </header>
       </Route>
       <Route path="/signin">
         <header className="header">
-          <img className="header__logo" src={logo} alt="logo.pic" />
-          <div className="header__user-container header__user-container_logout">
-            <Link to="/signup" className="header__user-link header__user-link_logout">Регистрация</Link>
+          <div className="header__container">
+            <img className="header__logo" src={logo} alt="logo.pic" />
+            <div className="header__user-container header__user-container_logout">
+              <Link to="/signup" className="header__user-link header__user-link_logout">Регистрация</Link>
+            </div>
           </div>
         </header>
       </Route>
       <Route path="/signup">
         <header className="header">
-          <img className="header__logo" src={logo} alt="logo.pic" />
-          <div className="header__user-container header__user-container_logout">
-            <Link to="/signin" className="header__user-link header__user-link_logout">Вход</Link>
+          <div className="header__container">
+            <img className="header__logo" src={logo} alt="logo.pic" />
+            <div className="header__user-container header__user-container_logout">
+              <Link to="/signin" className="header__user-link header__user-link_logout">Вход</Link>
+            </div>
           </div>
         </header>
       </Route>
