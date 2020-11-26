@@ -6,7 +6,7 @@ import "../index.css";
 import { removeToken } from "../utils/token";
 
 
-function Header({ data }) {
+function Header({ email }) {
 
   const history = useHistory();
   function signOut() {
@@ -20,7 +20,7 @@ function Header({ data }) {
         <header className="header">
           <img className="header__logo" src={logo} alt="logo.pic" />
           <div className="header__user-container">
-            <div className="header__user">data.email</div>
+            <div className="header__user">{email}</div>
             <Link to={signOut} className="header__user-link">Выйти</Link>
           </div>
         </header>

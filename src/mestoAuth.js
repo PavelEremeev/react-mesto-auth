@@ -28,15 +28,17 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then((res => res.json()))
-    .then((data) => {
-      if (data.token) {
-        setToken(data.jwt);
-        return data;
-      } else {
-        return;
-      }
-    })
+    .then(res => res.json())
+    // .then((data) => {
+    //   if (data.token) {
+    //     console.log(data)
+    //     setToken(data.token);
+    //     console.log(setToken)
+    //     return data;
+    //   } else {
+    //     return;
+    //   }
+    // })
     .catch(err => console.log(err))
 };
 
@@ -50,4 +52,5 @@ export const getContent = (token) => {
     }
   })
     .then(res => res.json())
+    .catch(err => console.log(err))
 }

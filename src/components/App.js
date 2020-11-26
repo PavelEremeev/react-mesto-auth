@@ -3,7 +3,7 @@ import { useHistory, Switch, Route, Redirect } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import api from "../utils/api.js";
-import { getToken } from "../utils/token";
+import { getToken, setToken, removeToken } from "../utils/token";
 import * as mestoAuth from "../mestoAuth"
 import Main from "./Main";
 import Footer from "./Footer";
@@ -17,14 +17,13 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
-import { set } from "mongoose";
 
 
 
 function App() {
   // Хуки-состояния
   const [loggedIn, setLoggedIn] = useState(false)
-  const [userData, setUserData] = useState({ email: '', password: '' })
+  const [email, setEmail] = useState('')
   const [status, setStatus] = useState(false)
   const [isAuthPopupOpen, setIsAuthPopupPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -49,34 +48,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => { tokenCheck() }, [])
-
-
-
-  function handleLogin(userData) {
-    setUserData(userData)
-    setLoggedIn(true)
-  }
-  // Проверка токена
-
-  function tokenCheck() {
-    const jwt = getToken();
-    if (!jwt) {
-      return;
-    }
-
-    mestoAuth.getContent(jwt)
-      .then((res) => {
-        if (res) {
-          const userData = {
-            email: res.email,
-            password: res.password
-          }
-          handleLogin(userData)
-          history.push('/')
-        }
-      })
-  }
 
 
 
@@ -138,6 +109,43 @@ function App() {
     })
   }
 
+  function handleUserLogin(email, password) {
+    mestoAuth.authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token)
+          setEmail(email)
+          setLoggedIn(true)
+          history.push('/')
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
+
+
+
+  // Проверка токена
+
+  function tokenCheck() {
+    const jwt = getToken();
+    console.log(jwt)
+    mestoAuth.getContent(jwt)
+      .then((data) => {
+        if (data) {
+          console.log(data)
+          setLoggedIn(true)
+          setEmail(data.email)
+          history.push('/')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
+  // useEffect(() => {
+  //   tokenCheck();
+  // }, []);
 
 
 
@@ -184,7 +192,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
         <div className="page">
-          <Header />
+          <Header email={email} />
           <Switch>
             <ProtectedRoute exact path='/'
               loggedIn={loggedIn}
@@ -201,7 +209,7 @@ function App() {
               newPlaceIsOpen={isAddPlacePopupOpen}
               card={selectedCard}>
             </ProtectedRoute>
-            <Route path="/signin"><Login handleLogin={handleLogin} /></Route>
+            <Route path="/signin"><Login onLogin={handleUserLogin} /></Route>
             <Route path="/signup"><Register onRegister={handleUserRegister} /></Route>
 
             <ProtectedRoute path='/' loggedIn={loggedIn} component={Footer} />
