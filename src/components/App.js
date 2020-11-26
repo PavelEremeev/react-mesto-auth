@@ -135,7 +135,7 @@ function App() {
         if (data) {
           console.log(data)
           setLoggedIn(true)
-          setEmail(data.email)
+          setEmail(data.data.email)
           history.push('/')
         }
       }).catch(err => {
@@ -143,9 +143,9 @@ function App() {
       })
   }
 
-  // useEffect(() => {
-  //   tokenCheck();
-  // }, []);
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
 
 
@@ -211,12 +211,11 @@ function App() {
             </ProtectedRoute>
             <Route path="/signin"><Login onLogin={handleUserLogin} /></Route>
             <Route path="/signup"><Register onRegister={handleUserRegister} /></Route>
-
-            <ProtectedRoute path='/' loggedIn={loggedIn} component={Footer} />
             <Route>
               {loggedIn ? <Redirect to="/" /> : <Redirect to="/signup" />}
             </Route>
           </Switch>
+          <Footer loggedIn={loggedIn} />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={handleClosePopups}

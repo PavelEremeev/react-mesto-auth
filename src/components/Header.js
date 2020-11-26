@@ -11,7 +11,7 @@ function Header({ email }) {
   const history = useHistory();
   function signOut() {
     removeToken()
-    history.push('/signup');
+    // history.push('/signup');
   }
 
   return (
@@ -21,7 +21,7 @@ function Header({ email }) {
           <img className="header__logo" src={logo} alt="logo.pic" />
           <div className="header__user-container">
             <div className="header__user">{email}</div>
-            <Link to={signOut} className="header__user-link">Выйти</Link>
+            <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
           </div>
         </header>
       </Route>
