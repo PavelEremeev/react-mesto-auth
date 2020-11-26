@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useHistory, Switch, Route, Redirect } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
@@ -70,10 +70,11 @@ function App() {
     });
   }
 
-  function handleHeaderMenuOpen() {
+  const handleHeaderMenu =
+    useCallback(() =>
+      setHeaderMenuOpen(prev => !prev),
+      [setHeaderMenuOpen]);
 
-    setHeaderMenuOpen(true)
-  }
 
 
   // Хендлеры карточки 
@@ -198,7 +199,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
         <div className="page">
-          <Header email={email} onClickMenu={isHeaderMenuOpen} onChangeHeaderMenu={handleHeaderMenuOpen} />
+          <Header email={email} onClickMenu={isHeaderMenuOpen} onChangeHeaderMenu={handleHeaderMenu} />
           <Switch>
             <ProtectedRoute exact path='/'
               loggedIn={loggedIn}

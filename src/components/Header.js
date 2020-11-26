@@ -32,7 +32,6 @@ function Header({ email, ...props }) {
               <div className="header__user">{email}</div>
               <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
             </div>
-
           </div>
         </header>
       </Route>
