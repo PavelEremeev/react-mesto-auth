@@ -22,8 +22,9 @@
   transition: ease-in 0.3s all;
 }
 
-@media screen and (max-width: 455px) {
+@media screen and (max-width: 450px) {
   .element {
     margin: 0 auto;
+    width: 282px;
   }
 }
