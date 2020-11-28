@@ -136,7 +136,10 @@ function App() {
 
   function tokenCheck() {
     const jwt = getToken();
-    console.log(jwt)
+
+    if (!jwt) {
+      return;
+    }
     mestoAuth.getContent(jwt)
       .then((data) => {
         if (data) {
@@ -154,7 +157,11 @@ function App() {
     tokenCheck();
   }, []);
 
+  // Удаляем токен из localStorage
 
+  function signOut() {
+    removeToken()
+  }
 
   // Хендлер закрытия попапов
   function handleClosePopups() {
@@ -199,7 +206,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
         <div className="page">
-          <Header email={email} onClickMenu={isHeaderMenuOpen} onChangeHeaderMenu={handleHeaderMenu} />
+          <Header email={email} onClickMenu={isHeaderMenuOpen} onChangeHeaderMenu={handleHeaderMenu} onSignOut={signOut} />
           <Switch>
             <ProtectedRoute exact path='/'
               loggedIn={loggedIn}

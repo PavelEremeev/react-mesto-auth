@@ -1,18 +1,12 @@
 import React from "react";
-import { Link, Route, useHistory, Switch } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import logo from "../images/logo.svg";
 import "../index.css";
 
-import { removeToken } from "../utils/token";
 
 
-function Header({ email, ...props }) {
+function Header({ email, onSignOut, ...props }) {
 
-  const history = useHistory();
-  function signOut() {
-    removeToken()
-    // history.push('/signup');
-  }
 
 
 
@@ -22,7 +16,7 @@ function Header({ email, ...props }) {
         <header className="header">
           <div className={`header__menu ${props.onClickMenu ? `header__menu_open` : ""}`}>
             <div className="header__user">{email}</div>
-            <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
+            <Link to="/signup" onClick={onSignOut} className="header__user-link">Выйти</Link>
           </div>
           <div className="header__container">
             <img className="header__logo" src={logo} alt="logo.pic" />
@@ -30,7 +24,7 @@ function Header({ email, ...props }) {
               <button className={`header__button ${props.onClickMenu ? `header__button_active` : ""}`} /></div>
             <div className="header__user-container">
               <div className="header__user">{email}</div>
-              <Link to="/signup" onClick={signOut} className="header__user-link">Выйти</Link>
+              <Link to="/signup" onClick={onSignOut} className="header__user-link">Выйти</Link>
             </div>
           </div>
         </header>
